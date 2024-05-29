@@ -1,9 +1,9 @@
-import { withTransaction } from '@elastic/apm-rum-react'
 import { useQuery } from '@tanstack/react-query'
 import { DollarSign } from 'lucide-react'
 
 import { getMonthCanceledOrdersAmount } from '@/api/get-month-canceled-orders-amount'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { withApmComponentTracker } from '@/hoc/withApmComponentTracker'
 
 import { MetricCardSkeleton } from './metric-card-skeleton'
 
@@ -53,7 +53,7 @@ function MonthCanceledOrdersAmountCardComponent() {
   )
 }
 
-export const MonthCanceledOrdersAmountCard = withTransaction(
+export const MonthCanceledOrdersAmountCard = withApmComponentTracker(
+  MonthCanceledOrdersAmountCardComponent,
   'MonthCanceledOrdersAmountCard',
-  'component',
-)(MonthCanceledOrdersAmountCardComponent)
+)

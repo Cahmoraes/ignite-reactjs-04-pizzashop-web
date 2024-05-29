@@ -1,4 +1,3 @@
-import { withTransaction } from '@elastic/apm-rum-react'
 import { useQuery } from '@tanstack/react-query'
 import { BarChart, Loader2 } from 'lucide-react'
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts'
@@ -6,6 +5,7 @@ import colors from 'tailwindcss/colors'
 
 import { getPopularProducts } from '@/api/get-popular-products'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { withApmRouteTracker } from '@/hoc/withApmRouteTracker'
 
 const COLORS = [
   colors.sky[500],
@@ -99,7 +99,7 @@ function PopularProductsChartComponent() {
   )
 }
 
-export const PopularProductsChart = withTransaction(
+export const PopularProductsChart = withApmRouteTracker(
+  PopularProductsChartComponent,
   'PopularProductsChart',
-  'component',
-)(PopularProductsChartComponent)
+)

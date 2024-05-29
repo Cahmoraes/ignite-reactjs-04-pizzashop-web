@@ -1,4 +1,3 @@
-import { withTransaction } from '@elastic/apm-rum-react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Search, X } from 'lucide-react'
 import { Controller, useForm } from 'react-hook-form'
@@ -14,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { withApmComponentTracker } from '@/hoc/withApmComponentTracker'
 
 const orderFiltersSchema = z.object({
   orderId: z.string().optional(),
@@ -143,7 +143,7 @@ function OrderTableFiltersComponent() {
   )
 }
 
-export const OrderTableFilters = withTransaction(
+export const OrderTableFilters = withApmComponentTracker(
+  OrderTableFiltersComponent,
   'OrderTableFilters',
-  'component',
-)(OrderTableFiltersComponent)
+)

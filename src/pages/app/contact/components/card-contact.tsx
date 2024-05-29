@@ -1,6 +1,6 @@
 // import { useEffect } from 'react'
 
-import { withTransaction } from '@elastic/apm-rum-react'
+import { withApmComponentTracker } from '@/hoc/withApmComponentTracker'
 
 // import { apm } from '@/lib/elastic-apm'
 
@@ -15,7 +15,7 @@ function CardContactComponent() {
   )
 }
 
-export const CardContact = withTransaction(
+export const CardContact = withApmComponentTracker(
+  CardContactComponent,
   'CardContact',
-  'component',
-)(CardContactComponent)
+)

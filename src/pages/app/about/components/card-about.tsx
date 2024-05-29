@@ -1,4 +1,4 @@
-import { withTransaction } from '@elastic/apm-rum-react'
+import { withApmComponentTracker } from '@/hoc/withApmComponentTracker'
 
 function CardAboutComponent() {
   return (
@@ -8,7 +8,7 @@ function CardAboutComponent() {
   )
 }
 
-export const CardAbout = withTransaction(
+export const CardAbout = withApmComponentTracker(
+  CardAboutComponent,
   'CardAbout',
-  'component',
-)(CardAboutComponent)
+)

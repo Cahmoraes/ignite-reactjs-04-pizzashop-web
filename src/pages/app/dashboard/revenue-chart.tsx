@@ -1,4 +1,3 @@
-import { withTransaction } from '@elastic/apm-rum-react'
 import { useQuery } from '@tanstack/react-query'
 import { subDays } from 'date-fns'
 import { Loader2 } from 'lucide-react'
@@ -24,6 +23,7 @@ import {
 } from '@/components/ui/card'
 import { DateRangePicker } from '@/components/ui/date-range-picker'
 import { Label } from '@/components/ui/label'
+import { withApmComponentTracker } from '@/hoc/withApmComponentTracker'
 
 function RevenueChartComponent() {
   const [dateRange, setDateRange] = useState<DateRange | undefined>({
@@ -100,7 +100,7 @@ function RevenueChartComponent() {
   )
 }
 
-export const RevenueChart = withTransaction(
+export const RevenueChart = withApmComponentTracker(
+  RevenueChartComponent,
   'RevenueChart',
-  'component',
-)(RevenueChartComponent)
+)

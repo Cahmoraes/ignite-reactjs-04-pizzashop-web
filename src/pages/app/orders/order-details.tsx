@@ -1,4 +1,3 @@
-import { withTransaction } from '@elastic/apm-rum-react'
 import { useQuery } from '@tanstack/react-query'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
@@ -20,6 +19,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { withApmRouteTracker } from '@/hoc/withApmRouteTracker'
 
 import { OrderDetailsSkeleton } from './order-details-skeleton'
 
@@ -138,7 +138,7 @@ function OrderDetailsComponent({ orderId, open }: OrderDetailsProps) {
   )
 }
 
-export const OrderDetails = withTransaction(
+export const OrderDetails = withApmRouteTracker(
+  OrderDetailsComponent,
   'OrderDetails',
-  'component',
-)(OrderDetailsComponent)
+)

@@ -1,4 +1,3 @@
-import { withTransaction } from '@elastic/apm-rum-react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
@@ -14,6 +13,7 @@ import { OrderStatus } from '@/components/order-status'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { TableCell, TableRow } from '@/components/ui/table'
+import { withApmComponentTracker } from '@/hoc/withApmComponentTracker'
 
 import { OrderDetails } from './order-details'
 
@@ -174,7 +174,7 @@ function OrderTableRowComponent({ order }: OrderTableRowProps) {
   )
 }
 
-export const OrderTableRow = withTransaction(
+export const OrderTableRow = withApmComponentTracker(
+  OrderTableRowComponent,
   'OrderTableRow',
-  'component',
-)(OrderTableRowComponent)
+)

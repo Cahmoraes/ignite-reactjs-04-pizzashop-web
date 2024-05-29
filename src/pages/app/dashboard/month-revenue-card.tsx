@@ -1,9 +1,9 @@
-import { withTransaction } from '@elastic/apm-rum-react'
 import { useQuery } from '@tanstack/react-query'
 import { DollarSign } from 'lucide-react'
 
 import { getMonthRevenue } from '@/api/get-month-revenue'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { withApmComponentTracker } from '@/hoc/withApmComponentTracker'
 
 import { MetricCardSkeleton } from './metric-card-skeleton'
 
@@ -56,7 +56,7 @@ function MonthRevenueCardComponent() {
   )
 }
 
-export const MonthRevenueCard = withTransaction(
+export const MonthRevenueCard = withApmComponentTracker(
+  MonthRevenueCardComponent,
   'MonthRevenueCard',
-  'component',
-)(MonthRevenueCardComponent)
+)

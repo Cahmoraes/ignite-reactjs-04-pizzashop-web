@@ -1,9 +1,9 @@
-import { withTransaction } from '@elastic/apm-rum-react'
 import { useQuery } from '@tanstack/react-query'
 import { Utensils } from 'lucide-react'
 
 import { getDayOrdersAmount } from '@/api/get-day-orders-amount'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { withApmComponentTracker } from '@/hoc/withApmComponentTracker'
 
 import { MetricCardSkeleton } from './metric-card-skeleton'
 
@@ -51,7 +51,7 @@ function DayOrdersAmountCardComponent() {
   )
 }
 
-export const DayOrdersAmountCard = withTransaction(
+export const DayOrdersAmountCard = withApmComponentTracker(
+  DayOrdersAmountCardComponent,
   'DayOrdersAmountCardComponent',
-  'component',
-)(DayOrdersAmountCardComponent)
+)
