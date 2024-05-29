@@ -1,8 +1,8 @@
 // import { useEffect } from 'react'
-import { withTransaction } from '@elastic/apm-rum-react'
 import { Helmet } from 'react-helmet-async'
 
 import { ContactProvider, useContact } from '@/contexts/contact-context'
+import { withApmRouteTracker } from '@/hoc/withApmRouteTracker'
 
 // import { useLocation } from 'react-router-dom'
 // import { apm } from '@/lib/elastic-apm'
@@ -44,4 +44,4 @@ function ContactProviderWrapper({ children }: ContactProviderProps) {
   return <ContactProvider>{children}</ContactProvider>
 }
 
-export const Contact = withTransaction('/contact', 'route-change')(ContactPage)
+export const Contact = withApmRouteTracker(ContactPage, '/contact')

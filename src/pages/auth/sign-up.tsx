@@ -1,4 +1,3 @@
-import { withTransaction } from '@elastic/apm-rum-react'
 import { useMutation } from '@tanstack/react-query'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
@@ -10,6 +9,7 @@ import { registerRestaurant } from '@/api/register-restaurant'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { withApmRouteTracker } from '@/hoc/withApmRouteTracker'
 
 const signUpForm = z.object({
   restaurantName: z.string(),
@@ -122,4 +122,4 @@ function SignUpPage() {
   )
 }
 
-export const SignUp = withTransaction('/sign-up', 'route-change')(SignUpPage)
+export const SignUp = withApmRouteTracker(SignUpPage, '/sign-up')

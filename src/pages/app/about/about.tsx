@@ -1,5 +1,6 @@
-import { withTransaction } from '@elastic/apm-rum-react'
 import { Helmet } from 'react-helmet-async'
+
+import { withApmRouteTracker } from '@/hoc/withApmRouteTracker'
 
 import { CardAbout } from './components/card-about'
 
@@ -16,4 +17,4 @@ function AboutPage() {
   )
 }
 
-export const About = withTransaction('/about', 'route-change')(AboutPage)
+export const About = withApmRouteTracker(AboutPage, '/about')

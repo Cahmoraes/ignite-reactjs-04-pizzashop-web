@@ -1,4 +1,3 @@
-import { withTransaction } from '@elastic/apm-rum-react'
 import { useMutation } from '@tanstack/react-query'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
@@ -10,6 +9,7 @@ import { signIn } from '@/api/sign-in'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { withApmRouteTracker } from '@/hoc/withApmRouteTracker'
 
 const signInForm = z.object({
   email: z.string().email(),
@@ -86,4 +86,4 @@ function SignInPage() {
   )
 }
 
-export const SignIn = withTransaction('/sign-in', 'route-change')(SignInPage)
+export const SignIn = withApmRouteTracker(SignInPage, '/sign-in')

@@ -1,4 +1,3 @@
-import { withTransaction } from '@elastic/apm-rum-react'
 import { useQuery } from '@tanstack/react-query'
 import { Helmet } from 'react-helmet-async'
 import { useSearchParams } from 'react-router-dom'
@@ -13,6 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { withApmRouteTracker } from '@/hoc/withApmRouteTracker'
 
 import { OrderTableFilters } from './order-table-filters'
 import { OrderTableRow } from './order-table-row'
@@ -96,4 +96,4 @@ function OrdersPage() {
   )
 }
 
-export const Orders = withTransaction('/orders', 'route-change')(OrdersPage)
+export const Orders = withApmRouteTracker(OrdersPage, '/orders')

@@ -1,5 +1,6 @@
-import { withTransaction } from '@elastic/apm-rum-react'
 import { Link } from 'react-router-dom'
+
+import { withApmRouteTracker } from '@/hoc/withApmRouteTracker'
 
 function NotFoundPage() {
   return (
@@ -15,7 +16,4 @@ function NotFoundPage() {
   )
 }
 
-export const NotFound = withTransaction(
-  '/not-found',
-  'route-change',
-)(NotFoundPage)
+export const NotFound = withApmRouteTracker(NotFoundPage, '/not-found')

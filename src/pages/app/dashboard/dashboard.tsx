@@ -1,5 +1,6 @@
-import { withTransaction } from '@elastic/apm-rum-react'
 import { Helmet } from 'react-helmet-async'
+
+import { withApmRouteTracker } from '@/hoc/withApmRouteTracker'
 
 import { DayOrdersAmountCard } from './day-orders-amount-card'
 import { MonthCanceledOrdersAmountCard } from './month-canceled-orders-amount-card'
@@ -31,7 +32,4 @@ function DashboardPage() {
   )
 }
 
-export const Dashboard = withTransaction(
-  '/dashboard',
-  'route-change',
-)(DashboardPage)
+export const Dashboard = withApmRouteTracker(DashboardPage, '/dashboard')
