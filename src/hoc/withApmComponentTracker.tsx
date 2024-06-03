@@ -16,7 +16,6 @@ export const withApmComponentTracker = <P extends object>(
       const transaction = apm.startTransaction(componentName, 'component', {
         managed: true,
       })
-
       // Criar um span para medir o tempo de montagem do componente
       const mountSpan = transaction?.startSpan('component-mount', 'custom')
 
@@ -25,7 +24,6 @@ export const withApmComponentTracker = <P extends object>(
       }
 
       if (transaction) {
-        // transaction.block()
         isDocumentReady() ? captureMetrics() : createEventLoadOnWindow()
       }
 

@@ -6,12 +6,14 @@ import {
   UtensilsCrossed,
 } from 'lucide-react'
 
+import { withLogger } from '@/hooks/with-logger'
+
 import { AccountMenu } from './account-menu'
 import { NavLink } from './nav-link'
 import { ThemeToggle } from './theme/theme-toggle'
 import { Separator } from './ui/separator'
 
-export function Header() {
+function HeaderComponent() {
   return (
     <div className="border-b">
       <div className="flex h-16 items-center gap-6 px-6">
@@ -46,3 +48,5 @@ export function Header() {
     </div>
   )
 }
+
+export const Header = withLogger(HeaderComponent)
